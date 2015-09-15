@@ -1,5 +1,4 @@
 # twitr
-=======
 a basic ios twitter client to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
 Time spent: `12`
