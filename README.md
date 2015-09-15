@@ -29,7 +29,7 @@ Time spent: `12`
 
 First, here's the functionality once you logged in (or open app from a persisted, logged-in state)
 
-![Video Walkthrough](loggin_demo.gif)
+![Video Walkthrough](demo.gif)
 
 Another quick demo showing logout and log in
 
