@@ -41,10 +41,14 @@ class TweetsCell: UITableViewCell {
                 
                 if tweet.favorited! == true {
                     self.favoriteButton.setImage(UIImage(named: "twitter_favorite_on.png"), forState: UIControlState.Normal)
+                } else {
+                    self.favoriteButton.setImage(UIImage(named: "twitter_favorite.png"), forState: UIControlState.Normal)
                 }
                 
                 if tweet.retweeted! == true {
                     self.retweetButton.setImage(UIImage(named: "twitter_retweet_on.png"), forState: UIControlState.Normal)
+                } else {
+                    self.retweetButton.setImage(UIImage(named: "twitter_retweet.png"), forState: UIControlState.Normal)
                 }
                 
                 if tweet.isARetweet == true {
