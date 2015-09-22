@@ -65,7 +65,7 @@ class TweetComposerController: UIViewController, UITextViewDelegate {
     
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("segue is \(segue)")
+        print("segue is \(segue)")
     }
 
     @IBAction func onTweet(sender: AnyObject) {
@@ -73,10 +73,10 @@ class TweetComposerController: UIViewController, UITextViewDelegate {
         if replyToTweet != nil {
             reply_id = replyToTweet!.id
         }
-        println("\(reply_id)")
+        print("\(reply_id)")
         TwitterClient.sharedInstance.tweet(tweetField.text, reply_id: reply_id, completion: { (response, error) -> () in
             if error == nil {
-                var tweet = response!
+                let tweet = response!
                 self.delegate?.tweetComposerController(self, didCreateTweet: tweet)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -88,13 +88,13 @@ class TweetComposerController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(textView: UITextView) {
-        var text = textView.text
+        let text = textView.text
         
-        if (count(text) > 140) {
-            textView.text = text.substringToIndex(advance(text.startIndex, 140))
+        if (text.characters.count > 140) {
+            textView.text = text.substringToIndex(text.startIndex.advancedBy(140))
         }
         
-        let remain = 140 - count(textView.text)
+        let remain = 140 - textView.text.characters.count
         
         charactersLeftLabel.text = "\(remain) left"
     }

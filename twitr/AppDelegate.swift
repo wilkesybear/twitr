@@ -21,16 +21,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if User.currentUser != nil {
             // Go to the logged in screen
-            println("Current user detected \(User.currentUser!.name)")
-            var vc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewNavigationController") as! UIViewController
+            print("Current user detected \(User.currentUser!.name)")
+            let vc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewNavigationController")
             window?.rootViewController = vc
+            
+            let tweetsViewController = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
+
+            vc.addChildViewController(tweetsViewController)
+            
+            let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+            
+            tweetsViewController.menuViewController = menuViewController
         }
         
         return true
     }
     
     func userDidLogout() {
-        var vc = storyboard.instantiateInitialViewController() as! UIViewController
+        let vc = storyboard.instantiateInitialViewController() as UIViewController!
         window?.rootViewController = vc
     }
 
@@ -56,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
         TwitterClient.sharedInstance.openURL(url)
         

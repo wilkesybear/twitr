@@ -32,7 +32,7 @@ class ViewController: UIViewController {
 //                println("Uh oh")
 //        }
         TwitterClient.sharedInstance.loginWithCompletion { (user, error) -> () in
-            println("completed login")
+            print("completed login")
             if user != nil {
                 self.performSegueWithIdentifier("loginSegue", sender: self)
             }

@@ -8,9 +8,22 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetComposerControllerDelegate, TweetsCellDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetComposerControllerDelegate, TweetsCellDelegate, UIGestureRecognizerDelegate {
+    
+    @IBOutlet weak var menuView: UIView!
+    @IBOutlet weak var contentView: UIView!
+    
+    var menuViewController: MenuViewController! {
+        didSet {
+            view.layoutIfNeeded()
+            menuView.addSubview(menuViewController.view)
+        }
+    }
     
     var tweets: [Tweet]?
+    
+    @IBOutlet weak var leftMargin: NSLayoutConstraint!
+    var originalLeftMargin : CGFloat = 0.0
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -35,6 +48,37 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         loadTimeline()
     }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    @IBAction func onTablePan(sender: UIPanGestureRecognizer) {
+                
+        let velocity = sender.velocityInView(view)
+        
+        let translation = sender.translationInView(view)
+        
+        if sender.state == UIGestureRecognizerState.Began {
+            originalLeftMargin = leftMargin.constant
+        } else if sender.state == UIGestureRecognizerState.Changed {
+            leftMargin.constant = originalLeftMargin + translation.x
+        } else if sender.state == UIGestureRecognizerState.Ended {
+            
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                if velocity.x > 0 {
+                    self.leftMargin.constant = self.view.frame.size.width - 50
+                } else {
+                    self.leftMargin.constant = 0
+                }
+            })
+            
+        }
+        
+        
+    }
+    
+
     
     func loadTimeline() {
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
@@ -77,11 +121,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        println("segue is \(segue.identifier)")
+        print("segue is \(segue.identifier)")
         
         if segue.identifier == "ComposeTweet" {
-            var nc = segue.destinationViewController as! UINavigationController
-            var vc = nc.topViewController as! TweetComposerController
+            let nc = segue.destinationViewController as! UINavigationController
+            let vc = nc.topViewController as! TweetComposerController
             vc.delegate = self
             
             if sender! is Tweet {
@@ -89,7 +133,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             }
             
         } else if segue.identifier == "TweetDetails" {
-            var vc = segue.destinationViewController as! TweetDetailsViewController
+            let vc = segue.destinationViewController as! TweetDetailsViewController
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)!
             let tweet = tweets![indexPath.row]

@@ -94,9 +94,9 @@ class TweetDetailsViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        println("segueing here")
-        var nc = segue.destinationViewController as! UINavigationController
-        var vc = nc.topViewController as! TweetComposerController
+        print("segueing here")
+        let nc = segue.destinationViewController as! UINavigationController
+        let vc = nc.topViewController as! TweetComposerController
         vc.replyToTweet = tweet!
     }
 
