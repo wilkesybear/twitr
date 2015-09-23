@@ -10,6 +10,7 @@ import UIKit
 
 protocol TweetsCellDelegate {
     func tweetsCell(tweetsCell: TweetsCell, replyToTweet: Tweet)
+    func tweetsCell(tweetsCell: TweetsCell, avatarClicked: User)
 }
 
 class TweetsCell: UITableViewCell {
@@ -18,7 +19,7 @@ class TweetsCell: UITableViewCell {
     @IBOutlet weak var retweetedLabel: UILabel!
     @IBOutlet weak var retweetedImage: UIImageView!
     
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageButton: UIButton!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var screennameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
@@ -33,7 +34,7 @@ class TweetsCell: UITableViewCell {
     var tweet: Tweet? {
         didSet {
             if let tweet = tweet {
-                avatarImageView.setImageWithURL(NSURL(string: tweet.user!.profileImageUrl!))
+                avatarImageButton.setBackgroundImageForState(UIControlState.Normal, withURL: NSURL(string: tweet.user!.profileImageUrl!))
                 usernameLabel.text = tweet.user?.name
                 screennameLabel.text = "@\(tweet.user!.screenName!)"
                 tweetTextLabel.text = tweet.text
@@ -95,4 +96,7 @@ class TweetsCell: UITableViewCell {
         
     }
     
+    @IBAction func onAvatarClicked(sender: AnyObject) {
+        delegate?.tweetsCell(self, avatarClicked: tweet!.user!)
+    }
 }

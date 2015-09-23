@@ -94,6 +94,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             let indexPath = tableView.indexPathForCell(cell)!
             let tweet = tweets![indexPath.row]
             vc.tweet = tweet
+        } else if segue.identifier == "ProfileSegue" {
+            let vc = segue.destinationViewController as! ProfileDetailsController
+            vc.user = sender as! User
         }
     }
     
@@ -110,6 +113,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tweetsCell(tweetsCell: TweetsCell, replyToTweet: Tweet) {
         performSegueWithIdentifier("ComposeTweet", sender: replyToTweet)
+    }
+    
+    func tweetsCell(tweetsCell: TweetsCell, avatarClicked: User) {
+        performSegueWithIdentifier("ProfileSegue", sender: avatarClicked)
     }
 
 
