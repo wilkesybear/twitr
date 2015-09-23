@@ -69,9 +69,6 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         
         GET("1.1/statuses/home_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
-            for t in tweets {
-                print("\(t.text) \(t.createdAt)")
-            }
             completion(tweets: tweets, error: nil)
             }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 print("failed to get timeline")
@@ -119,7 +116,8 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     func mentions(completion: (response: [Mention]?, error:NSError?) -> ()) {
         GET("/1.1/statuses/mentions_timeline.json", parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             var mentions = [Mention]()
-            for m in response as! [NSDictionary] {                                let name = m.valueForKeyPath("user.name") as! String
+            for m in response as! [NSDictionary] {
+                let name = m.valueForKeyPath("user.name") as! String
                 let mention = m["text"] as! String
                 mentions.append(Mention(n: name, t: mention))
             }
@@ -127,6 +125,17 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 print("Could not get mentions: \(error)")
                 completion(response: nil, error: error)
+        })
+    }
+    
+    func userTweets(id: Int, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+        let params = ["id": id]
+        GET("1.1/statuses/user_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                print("failed to get user tweets")
+                completion(tweets: nil, error: error)
         })
     }
     

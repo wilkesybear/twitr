@@ -22,16 +22,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if User.currentUser != nil {
             // Go to the logged in screen
             print("Current user detected \(User.currentUser!.name)")
-            let vc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewNavigationController")
+            let vc = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
             window?.rootViewController = vc
             
-            let tweetsViewController = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
-
-            vc.addChildViewController(tweetsViewController)
+            let tweetsViewNavigationController = storyboard.instantiateViewControllerWithIdentifier("TweetsViewNavigationController")
             
+            vc.contentViewController = tweetsViewNavigationController
+
             let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
             
-            tweetsViewController.menuViewController = menuViewController
+            vc.menuViewController = menuViewController
+            
+            menuViewController.hamburgerViewController = vc
+            menuViewController.tweetsViewController = tweetsViewNavigationController
+            
+            let profileController = storyboard.instantiateViewControllerWithIdentifier("ProfileDetailsController") as! ProfileDetailsController
+            
+            menuViewController.profileViewController = profileController
         }
         
         return true

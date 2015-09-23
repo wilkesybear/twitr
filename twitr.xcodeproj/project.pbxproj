@@ -31,6 +31,9 @@
 		5ABAC5EF1BB101F3004B91EB /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABAC5EE1BB101F3004B91EB /* ProfileHeaderCell.swift */; settings = {ASSET_TAGS = (); }; };
 		5ABAC5F11BB10221004B91EB /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABAC5F01BB10221004B91EB /* NotificationCell.swift */; settings = {ASSET_TAGS = (); }; };
 		5ABAC5F31BB10FF0004B91EB /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABAC5F21BB10FF0004B91EB /* Mention.swift */; settings = {ASSET_TAGS = (); }; };
+		5ABAC5F71BB22E0C004B91EB /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABAC5F61BB22E0C004B91EB /* HamburgerViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		5ABAC5F91BB234BF004B91EB /* ProfileDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABAC5F81BB234BF004B91EB /* ProfileDetailsController.swift */; settings = {ASSET_TAGS = (); }; };
+		5ABAC5FD1BB239A2004B91EB /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABAC5FC1BB239A2004B91EB /* ProfileViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +75,9 @@
 		5ABAC5EE1BB101F3004B91EB /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
 		5ABAC5F01BB10221004B91EB /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		5ABAC5F21BB10FF0004B91EB /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
+		5ABAC5F61BB22E0C004B91EB /* HamburgerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
+		5ABAC5F81BB234BF004B91EB /* ProfileDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetailsController.swift; sourceTree = "<group>"; };
+		5ABAC5FC1BB239A2004B91EB /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
 		953698978D07D199CDF8E81E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D170BF572BFE84853416E5C3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F3E1F3E19CDEC20F8E9FB676 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -177,6 +183,8 @@
 				5AA51D2A1BA8740900213BF0 /* TweetComposerController.swift */,
 				5AA51D2C1BA88DFC00213BF0 /* TweetDetailsViewController.swift */,
 				5ABAC5EC1BB0F7D5004B91EB /* MenuViewController.swift */,
+				5ABAC5F61BB22E0C004B91EB /* HamburgerViewController.swift */,
+				5ABAC5F81BB234BF004B91EB /* ProfileDetailsController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -187,6 +195,7 @@
 				5AA51D1B1BA8520500213BF0 /* TweetsCell.swift */,
 				5ABAC5EE1BB101F3004B91EB /* ProfileHeaderCell.swift */,
 				5ABAC5F01BB10221004B91EB /* NotificationCell.swift */,
+				5ABAC5FC1BB239A2004B91EB /* ProfileViewCell.swift */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -374,14 +383,17 @@
 			files = (
 				5AA51D141BA7C02600213BF0 /* User.swift in Sources */,
 				5ABAC5ED1BB0F7D5004B91EB /* MenuViewController.swift in Sources */,
+				5ABAC5F91BB234BF004B91EB /* ProfileDetailsController.swift in Sources */,
 				5AA51D1C1BA8520500213BF0 /* TweetsCell.swift in Sources */,
 				5AA51D161BA7C03400213BF0 /* Tweet.swift in Sources */,
 				5ABAC5F11BB10221004B91EB /* NotificationCell.swift in Sources */,
 				5AA51D181BA84A9400213BF0 /* TweetsViewController.swift in Sources */,
+				5ABAC5F71BB22E0C004B91EB /* HamburgerViewController.swift in Sources */,
 				5AA51D2D1BA88DFC00213BF0 /* TweetDetailsViewController.swift in Sources */,
 				5A5339191BA7AAD600D83215 /* ViewController.swift in Sources */,
 				5AA51D2B1BA8740900213BF0 /* TweetComposerController.swift in Sources */,
 				5ABAC5EF1BB101F3004B91EB /* ProfileHeaderCell.swift in Sources */,
+				5ABAC5FD1BB239A2004B91EB /* ProfileViewCell.swift in Sources */,
 				5AA6D9CB1BA7ACA40063AFE7 /* TwitterClient.swift in Sources */,
 				5ABAC5F31BB10FF0004B91EB /* Mention.swift in Sources */,
 				5A5339171BA7AAD600D83215 /* AppDelegate.swift in Sources */,

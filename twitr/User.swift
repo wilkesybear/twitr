@@ -14,20 +14,40 @@ let userDidLoginNotification = "userDidLoginNotification"
 let userDidLogoutNotification = "userDidLogoutNotification"
 
 class User: NSObject {
+    var id: Int?
     var name: String?
     var screenName: String?
     var profileImageUrl: String?
     var profileImageUrlHD: String?
     var tagline: String?
     var dictionary: NSDictionary
+    var followingCount: Int?
+    var followersCount: Int?
+    var profileHeader: String?
+    var numTweets: Int?
+    
+    var tweets: [Tweet]?
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
+        id = dictionary["id"] as? Int
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
-        profileImageUrl = dictionary["profile_image_url_https"] as?String
-        profileImageUrlHD = dictionary["profile_image_url_https_bigger"] as? String
+        profileImageUrl = dictionary["profile_image_url_https"] as? String
+        
+        profileImageUrlHD = profileImageUrl!
+        
+        let range = profileImageUrlHD!.rangeOfString("_normal", options: .RegularExpressionSearch)
+        if let range = range {
+            profileImageUrlHD = profileImageUrlHD!.stringByReplacingCharactersInRange(range, withString: "_bigger")
+        }
+        
         tagline = dictionary["description"] as? String
+        followingCount = dictionary["friends_count"] as? Int
+        followersCount = dictionary["followers_count"] as? Int
+        
+        profileHeader = dictionary["profile_banner_url"] as? String
+        numTweets = dictionary["statuses_count"] as? Int
     }
     
     func logout() {
@@ -35,6 +55,15 @@ class User: NSObject {
         TwitterClient.sharedInstance.requestSerializer.removeAccessToken()
         
         NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
+    }
+    
+    func getTweets(completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+        TwitterClient.sharedInstance.userTweets(id!, completion: { (tweets, error) -> () in
+            if tweets != nil {
+                self.tweets = tweets
+            }
+            completion(tweets: self.tweets, error: error)
+        })
     }
     
     class var currentUser: User? {

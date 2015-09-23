@@ -16,6 +16,10 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var mentions: [Mention]?
     
+    var hamburgerViewController: HamburgerViewController!
+    var tweetsViewController: UIViewController!
+    var profileViewController: ProfileDetailsController!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,6 +88,17 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             return cell
         }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.section == 0 {
+            profileViewController.user = User.currentUser
+            hamburgerViewController.contentViewController = profileViewController
+        } else if indexPath.section == 1 {
+            hamburgerViewController.contentViewController = tweetsViewController
+        }
+        
     }
     
 
